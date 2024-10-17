@@ -1,0 +1,51 @@
+<!-- wizard.component.html -->
+<div class="wizard">
+  <!-- Stepper -->
+  <div class="stepper">
+    <button (click)="goToStep(1)" [ngClass]="{'active': currentStep === 1}">Step 1</button>
+    <button (click)="goToStep(2)" [ngClass]="{'active': currentStep === 2}">Step 2</button>
+    <button (click)="goToStep(3)" [ngClass]="{'active': currentStep === 3}">Step 3</button>
+    <button (click)="goToStep(4)" [ngClass]="{'active': currentStep === 4}">Step 4</button>
+  </div>
+
+  <!-- Steps Content -->
+  <div *ngIf="currentStep === 1">
+    <h2>Step 1: Personal Information</h2>
+    <form [formGroup]="step1Form">
+      <label>Name:</label>
+      <input formControlName="name" />
+    </form>
+    <button (click)="nextStep()">Next</button>
+  </div>
+
+  <div *ngIf="currentStep === 2">
+    <h2>Step 2: Contact Information</h2>
+    <form [formGroup]="step2Form">
+      <label>Email:</label>
+      <input formControlName="email" />
+    </form>
+    <button (click)="previousStep()">Back</button>
+    <button (click)="nextStep()">Next</button>
+  </div>
+
+  <div *ngIf="currentStep === 3">
+    <h2>Step 3: Address Information</h2>
+    <form [formGroup]="step3Form">
+      <label>Address:</label>
+      <input formControlName="address" />
+    </form>
+    <button (click)="previousStep()">Back</button>
+    <button (click)="nextStep()">Next</button>
+  </div>
+
+  <div *ngIf="currentStep === 4">
+    <h2>Step 4: Review and Submit</h2>
+    <div>
+      <p><strong>Name:</strong> {{ step1Form.value.name }}</p>
+      <p><strong>Email:</strong> {{ step2Form.value.email }}</p>
+      <p><strong>Address:</strong> {{ step3Form.value.address }}</p>
+    </div>
+    <button (click)="previousStep()">Back</button>
+    <button (click)="submitWizard()">Submit</button>
+  </div>
+</div>
